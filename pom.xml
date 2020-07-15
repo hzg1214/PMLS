@@ -17,7 +17,7 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 
-		<jackson.version>2.7.5</jackson.version>
+		<jackson.version>2.11.1</jackson.version>
 		<spring-data-redis.version>1.1.0.RELEASE</spring-data-redis.version>
 		<jedis.version>2.1.0</jedis.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
