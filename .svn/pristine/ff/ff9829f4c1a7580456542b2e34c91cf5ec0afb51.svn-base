@@ -1,0 +1,240 @@
+
+.loginMainDiv{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #F7F9FE;
+}
+.loginDiv{
+    width:800px;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0 2px 14px 0 rgba(29,56,125,0.11);
+    border-radius: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.loginDiv .leftDiv{
+    width: 400px;
+    height: 330px;
+    background-image: url(../images/login_back.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    float:left;
+}
+.loginDiv .appTitleSpan{
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 15px;
+    line-height: 60px;
+    color: #fff;
+}
+.loginDiv .rightDiv{
+    width: 400px;
+    height: 330px;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #fff;
+    float:left;
+}
+.loginDiv .rightDiv .layui-form{
+    margin-top:35px;
+    display: inline-block;
+
+}
+.loginDiv .rightDiv .layui-form table{
+    position: relative;
+    margin: 0 auto;
+}
+.loginDiv .rightDiv table tr{
+    line-height: 45px;
+}
+.loginDiv .rightDiv .userCode{
+    width: 200px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #1CA7F4;
+    border-radius: 4px;
+    background: url(../images/icon_user.png) no-repeat;
+    background-color: white;
+    background-position: 5px;
+    background-size: 12px;
+    padding-left: 25px;
+
+}
+.loginDiv .rightDiv .password{
+    width: 200px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    background: url(../images/icon_pass.png) no-repeat;
+    background-color: white;
+    background-position: 5px;
+    background-size: 12px;
+    padding-left: 25px;
+}
+.loginDiv .rightDiv .passwordWechart{
+    width: 100px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    background: url(../images/icon_pass.png) no-repeat;
+    background-color: white;
+    background-position: 5px;
+    background-size: 12px;
+    padding-left: 25px;
+}
+.loginBtn{
+    border-radius: 4px;
+    width: 200px;
+    height: 32px;
+    background-image: url(../images/login_btn_back.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: 0px;
+    color: #fff;
+    margin-top:30px;
+    box-shadow: 0 4px 10px 0 rgba(10, 24, 83, 0.20);
+    cursor:pointer;
+}.loginWechartPasswordBtn{
+     border-radius: 4px;
+     width: 100px;
+     height: 29px;
+     /*background-image: url(../images/login_btn_back.png);*/
+     background-size: 100%;
+     background-repeat: no-repeat;
+     border: 0px;
+     color: #fff;
+ }
+
+.loginIcon {
+    width: 506px;
+    height: 380px;
+    background-image: url(../../images/loginBackground.png);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    float:left;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translateX(-100%) translateY(-50%);
+}
+.loginTitle {
+    font-size: 22px;
+    color: #666666;
+    line-height: 40px;
+    font-weight: bold;
+    margin-left: 18.8%;
+    height: 60px;
+    background-image: url(../../images/logo.png);
+    background-position: top left;
+    margin-top:25px ;
+    background-repeat: no-repeat;
+    /*background-size: 100% auto;*/
+}
+
+.loginMain {
+    background: linear-gradient(-180deg, #43DBFD 5%, #5E72FF 100%);
+    width: 100%;
+    height: calc(100% - 145px);
+    display: inherit;
+    align-items: left;
+    justify-content: left;
+}
+
+.login {
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px 0 rgba(10, 24, 83, 0.20);
+    border-radius: 8px;
+    height: 220px;
+    margin-left: 540px;
+    width: 500px;
+    text-align: center;
+    margin-top: 75px;
+}
+.loginQrCode {
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px 0 rgba(10, 24, 83, 0.20);
+    border-radius: 8px;
+    height: 160px;
+    width: 160px;
+    text-align: center;
+    display: inline-block;
+    background-image: url(../../images/qrcode-img-xt.png);
+    background-repeat: no-repeat;
+    margin-top: 10px;
+}
+
+.loginHead {
+    font-size: 18px;
+    color: #333333;
+    letter-spacing: 0;
+    font-weight: bold;
+    line-height: 66px;
+}
+
+.loginInput {
+    background: #FFFFFF;
+    border: 1px solid #EEEEEE;
+    border-radius: 2px;
+    height: 30px;
+    width: 170px;
+    margin-top: 30px;
+    padding-left: 30px;
+}
+
+.copyRight {
+    font-size: 12px;
+    color: #999999;
+    line-height: 60px;
+    text-align: center;
+}
+
+
+.loginDivFor{
+    position: relative;
+    margin: 0px 30px;
+    display: inline-block;
+}
+.disableClick{
+    color:#CCCCCC;
+}
+.normal{
+    color:rgb(69,190,255);
+}.loginMainTop{
+     opacity: 0.1;
+    height: 80px;
+     background-image: linear-gradient(138deg, #46E7FF 0%, #3F56F8 100%);
+     box-shadow: 2px 4px 8px 0 rgba(24,159,255,0.20);
+     background-image: url(../../images/zsxt_s.png);
+ }.loginMainFoot{
+      height: 80px;
+       opacity: 0.25;
+       background-image: linear-gradient(137deg, rgba(70,231,255,0.00) 0%, #46E7FF 30%, #3F56F8 100%);
+       box-shadow: 2px 4px 8px 0 rgba(24,159,255,0.20);
+       background-image: url(../../images/zsxt_x.png);
+  }
+
+.icon_username{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background-image: url(../../images/icon_username@1x.png);
+    background-size: 100% 100%;
+    margin-top: 37px;
+    margin-left: 7px;
+}
+.icon_password{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background-image: url(../../images/icon_password@1x.png);
+    background-size: 100% 100%;
+    margin-top: 37px;
+    margin-left: 7px;
+}
+.normal{
+    color:rgb(69,190,255);
+}

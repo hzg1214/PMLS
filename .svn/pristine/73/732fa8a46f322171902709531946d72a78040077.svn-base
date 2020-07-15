@@ -1,0 +1,281 @@
+﻿/** logo部分样式 */
+.layui-layout-admin .layui-header .layui-logo {
+    background-color: #03152A;
+    color: #ffffff;
+}
+
+/** header样式 */
+.layui-layout-admin .layui-header {
+    background-color: #fff;
+    border-bottom: none;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+
+.layui-layout-admin .layui-header a {
+    color: #333;
+}
+
+.layui-layout-admin .layui-header a:hover {
+    color: #333;
+}
+
+.layui-layout-admin .layui-header .layui-nav .layui-nav-more {
+    border-color: #333 transparent transparent;
+}
+
+.layui-layout-admin .layui-header .layui-nav .layui-nav-mored {
+    border-color: transparent transparent #333;
+}
+
+/** 导航栏下面的线条 */
+.layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
+    background-color: #333;
+}
+
+/** 侧边栏样式 */
+.layui-layout-admin .layui-side{
+    background-color: #03152A!important;
+}
+.layui-layout-admin .layui-side .layui-nav{
+    background-color: #03152A!important;
+}
+.layui-layout-admin .layui-logo{
+    background-color: #03152A!important;
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
+    background-color: #3B91FF;
+}
+
+.layui-nav-tree .layui-nav-bar {
+    background-color: #3B91FF;
+}
+
+/** 主题颜色 */
+
+/** 按钮 */
+.layui-btn:not(.layui-btn-primary):not(.layui-btn-normal):not(.layui-btn-warm):not(.layui-btn-danger):not(.layui-btn-disabled) {
+    background-color: #3B91FF;
+}
+
+.layui-btn.layui-btn-primary:hover {
+    border-color: #3B91FF;
+}
+
+/** 开关 */
+.layui-form-onswitch {
+    border-color: #3B91FF;
+    background-color: #3B91FF;
+}
+
+/** 分页插件 */
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+    background-color: #3B91FF;
+}
+
+.layui-table-page .layui-laypage input:focus {
+    border-color: #3B91FF !important;
+}
+
+.layui-table-view select:focus {
+    border-color: #3B91FF !important;
+}
+
+.layui-table-page .layui-laypage a:hover {
+    color: #3B91FF;
+}
+
+/** 单选按钮 */
+.layui-form-radio > i:hover, .layui-form-radioed > i {
+    color: #3B91FF;
+}
+
+/** 复选按钮 */
+.layui-form-checked[lay-skin=primary] i{
+    border-color: #3B91FF!important;
+    background-color: #3B91FF;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i{
+    border-color: #3B91FF!important;
+}
+
+/** 下拉条目选中 */
+.layui-form-select dl dd.layui-this {
+    background-color: #3B91FF;
+}
+
+/** 选项卡 */
+.layui-tab-brief > .layui-tab-title .layui-this {
+    color: #3B91FF;
+}
+
+.layui-tab-brief > .layui-tab-more li.layui-this:after, .layui-tab-brief > .layui-tab-title .layui-this:after {
+    border-color: #3B91FF !important;
+}
+
+/** 面包屑导航 */
+.layui-breadcrumb a:hover {
+    color: #3B91FF !important;
+}
+.layui-body{
+    background-color: #F2F2F2;
+}
+.layui-layout-admin .layui-body{
+    top:50px;
+}
+
+/** 修改表单样式 */
+.redSpan{
+    color: red;
+}
+
+/*上传图片的样式开始*/
+.layui-upload .layui-quote-nm{
+    border-width: 1px;
+}
+.upload_img_list {
+    margin: 0;
+    display: inline-block;
+}
+.upload_img_list dd {
+    position: relative;
+    margin: 0 10px 10px 0;
+    float: left
+}
+.upload_img_list .operate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1
+}
+.upload_img_list .operate i {
+    cursor: pointer;
+    background: #2F4056;
+    padding: 2px;
+    line-height: 15px;
+    text-align: center;
+    color: #fff;
+    margin-left: 1px;
+    float: left;
+    filter: alpha(opacity=80);
+    -moz-opacity: .8;
+    -khtml-opacity: .8;
+    opacity: .8
+}
+.upload_img_list dd .img {
+    height: 120px;
+    width: 157px;
+    object-fit:cover;
+}
+/*上传图片的样式结束*/
+
+.layui-linkbutton{
+    color:#1E9FFF;
+    padding-left: 10px;
+    cursor:default;
+}
+.layui-linkbutton:hover {
+    cursor:pointer;
+    text-decoration:underline;
+    color:#1E9FFF;
+
+}
+.layui-laydate li.layui-this,.layui-laydate td.layui-this{
+    background-color: #1E9FFF!important;
+}
+.layui-tab-title li{
+    transition:all 0s;
+}
+.layui-card .layui-tab-brief .layui-tab-title li.layui-this{
+    color: #3B91FF;
+    font-weight: bold;
+}
+.layadmin-header.layui-card{
+    margin-bottom: 0px;
+}
+.layui-card{
+    margin-bottom: 8px;
+}
+.blockBody {
+    margin-top: 5px;
+    line-height: 38px;
+    height: 38px;
+}
+.blockBody .blockTitle{
+    font-size: 17px;
+    font-weight: bold;
+}
+.blockBtn{
+    text-align: right;
+}
+.layui-elem-field legend{
+    font-size: 14px;
+}
+.operationPageToolbar{
+    margin-top: 15px;
+    margin-left: 330px;
+    padding-bottom: 30px;
+}
+.myForm .layui-form-label{
+    width:300px;
+}
+.myForm .layui-input-block{
+    margin-left: 330px;
+    min-height: 36px;
+    margin-right: 20px;
+    width: 420px;
+}
+.enclosureForm .layui-form-label{
+    width:300px;
+}
+.enclosureForm .layui-input-block{
+    margin-left: 330px;
+    min-height: 36px;
+    margin-right: 20px;
+}
+.layui-input:disabled,.layui-input[disabled]{
+    border: 1px solid #DDD;
+    background-color: #F5F5F5;
+    color:#ACA899;opacity: 1;
+}
+.dottedLine{
+    background-color: #FFFFFF;
+    border-top: 1px dashed #e6e6e6;
+}
+.layui-select-disabled .layui-disabled{
+    border: 1px solid #DDD;
+    background-color: #F5F5F5;
+    color:#ACA899;opacity: 1;
+}
+
+ .icon-explain{
+     width: 16px;
+     height: 16px;
+     display: inline-block;
+     vertical-align: middle;
+     position: relative;
+     text-align: center;
+     color: #fff;
+     font-style: normal;
+     font-size: 10px;
+     line-height: 17px;
+ }
+.icon-explain::after, .icon-explain::before{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.icon-explain::before {
+    content: "\20";
+    border-radius: 100%;
+    background-color: #4A9AFB;
+}
+.icon-explain::after {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+}

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/page/common/taglib.jsp" %>
+
+<script type="text/javascript" src="${ctx}/meta/js/houseLinkage/estate/projectLeader.js?_v=${vs}"></script>
+<script>
+    $(function () {
+        // 初始化查询
+        ProjectLeader.initList();
+    });
+</script>
+<!-- <div class="fs14 tanchuang-pannel " role="main"> -->
+<div class="" role="main">
+
+    <span class="" style="float:right">
+        <a href="javascript:RelateProjectLeaderUtil.close();" class="btn btn-default">&times;</a>
+    </span>
+
+    <div class="row">
+        <div class="page-content" style="clear: initial;">
+            <h4><strong>项目负责人选择</strong></h4>
+            <!-- 搜索条件区域 -->
+            <form id="achieveMentUserForm">
+                <!-- 默认排序字段、排序类型 -->
+                <input type="hidden" id="orderName" name="orderName" value="dateCreate">
+                <input type="hidden" id="orderType" name="orderType" value="DESC">
+                <input type="hidden" id="ids" name="ids" value="${ids}">
+                <input type="hidden" id="storeCenterId" name="storeCenterId" value="${storeCenterId}">
+
+                <ul class="list-inline form-inline" style="margin-bottom: 0px;">
+                    <li>
+                        <div class="form-group">
+                            <label class="">员工编号</label>
+                            <input type="text" class="form-control" id="userCode" name="userCode">
+                        </div>
+                        <div class="form-group">
+                            <label class="">员工姓名</label>
+                            <input type="text" class="form-control" id="userName" name="userName">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="javascript:ProjectLeader.search();">
+                            搜索
+                        </button>
+                    </li>
+                </ul>
+                <div id="errorMsg" style="color: red;margin-bottom: 5px;visibility: hidden;height: 20px;"></div>
+                <!-- 异步加载列表内容 -->
+                <div id="load_content">
+                    <div id="LoadCxtPopup"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

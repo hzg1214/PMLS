@@ -1,0 +1,4 @@
+redis.host=10.0.33.13
+redis.port=16381
+redis.password=fangyou123
+redis.timeout=120000

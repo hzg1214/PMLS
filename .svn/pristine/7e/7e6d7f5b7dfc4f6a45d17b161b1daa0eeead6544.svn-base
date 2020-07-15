@@ -1,0 +1,752 @@
+<%@ page contentType="text/html;charset=UTF-8" trimDirectiveWhitespaces="true" language="java" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目详情</title>
+    <%@include file="../common/common.jsp" %>
+    <style type="text/css">
+        .layui-form-item{
+            margin-bottom: 0px;
+            padding-left: 32px;
+        }
+
+        .layui-form-item .layui-inline .layui-form-label{
+            padding: 9px 3px 9px 15px;
+            width: 190px;
+        }
+
+        .layui-form .layui-input-inline{
+            height: 38px;
+            line-height: 38px;
+            width: 230px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+        }
+
+        .layui-form-item .layui-inline.toolbar{
+            margin-left: 180px;
+        }
+
+        .nodata{
+            line-height: 26px;
+            padding: 15px;
+            text-align: center;
+            color: #999;
+        }
+
+        .fieldsetDiv{
+            font-weight: 700;
+        }
+        
+        #yjsrItem .layui-table-cell {
+			height:auto;
+			overflow:visible;
+			text-overflow:inherit;
+			white-space:normal;
+		}
+		
+        #yjfyItem .layui-table-cell {
+			height:auto;
+			overflow:visible;
+			text-overflow:inherit;
+			white-space:normal;
+		}
+
+    </style>
+</head>
+<script type="application/javascript">
+</script>
+<body>
+
+<div class="estateDetailPage">
+    <input type="hidden" name="id" id="id" value="${estateInfo.estate.id}">
+    <input type="hidden" name="estateId" id="estateId" value="${estateInfo.estate.estateId}">
+    <input type="hidden" name="cityNo" id="cityNo" value="${estateInfo.estate.cityNo}">
+    <input type="hidden" name="cityNm" id="cityNm" value="${estateInfo.estate.cityNm}">
+    <input type="hidden" name="projectNo" id="projectNo" value="${estateInfo.estate.projectNo}">
+
+    <div class="layui-card">
+        <div class="layui-card-body">
+
+            <div class="layui-row blockBody">
+                <div class="layui-col-xs6">
+                    <div class="blockTitle">项目详情</div>
+                </div>
+                <div class="layui-col-xs6 blockBtn">
+                    <shiro:hasPermission name="/estate:CHANGE_PLAN">
+                        <c:if test="${estateInfo.estate.auditStatus eq 12903 and estateInfo.estate.projectStatus ne 20303}">
+                            <button type="button" class="layui-btn" data-type="addIncomePlan">佣金方案维护</button>
+                        </c:if>
+                    </shiro:hasPermission>
+                    <c:if test="${type eq 'detail' and estateInfo.estate.auditStatus eq 12903}">
+                        <shiro:hasPermission name="/estate:CHANGE_DETAIL">
+                            <%--            <button type="button" class="layui-btn" data-type="estateInfoChange">项目信息变更</button>--%>
+                        </shiro:hasPermission>
+                    </c:if>
+                    <c:if test="${type eq 'detail'}">
+                        <shiro:hasPermission name="/estate:CHANGE_City">
+                            <button type="button" class="layui-btn" data-type="popupReleaseCity">项目发布城市变更</button>
+                        </shiro:hasPermission>
+                    </c:if>
+                    <shiro:hasPermission name="/pmlsEstate:ESTATE_AUDIT">
+                        <c:if test="${estateInfo.estate.auditStatus eq '12901' and 20304 ne estateInfo.estate.projectStatus}">
+                        <button type="button" class="layui-btn" data-type="projectAudit">审核</button>
+                        </c:if>
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="/pmlsEstate:HZYX_STATUS">
+                        <c:if test="${20301 eq estateInfo.estate.projectStatus}">
+                        <c:choose>
+                            <c:when test="${estateInfo.estate.cooperationStatus eq '2'}">
+                                <button type="button" class="layui-btn" data-type="cooperationStatus1">合作意向状态变更为极有意向</button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="button" class="layui-btn" data-type="cooperationStatus2">合作意向状态变更为一般跟单</button>
+                            </c:otherwise>
+                        </c:choose>
+                        </c:if>
+                    </shiro:hasPermission>
+                    <button type="button" class="layui-btn layui-btn-primary" data-type="backEstateList">返回</button>
+                </div>
+            </div>
+
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 5px;">
+                <legend>基本信息</legend>
+            </fieldset>
+            <div class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目编号：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.projectNo}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">楼盘名称：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.estateNm}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目归属：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.cityNm} - ${estateInfo.estate.projectDepartment}
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="width: auto;">
+                        <label class="layui-form-label">项目地址：</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                            <c:if test="${estateInfo.estate.estatePosition eq 0}">
+                                ${estateInfo.estate.realityCityNm}${estateInfo.estate.districtNm}${estateInfo.estate.areaNm}${estateInfo.estate.address}
+                            </c:if>
+                            <c:if test="${estateInfo.estate.estatePosition eq 1}">
+                                ${estateInfo.estate.countryNm}${estateInfo.estate.address}
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目状态：</label>
+                        <div class="layui-input-inline">
+                            <c:if test="${20301 eq estateInfo.estate.projectStatus}">
+                                跟单
+                            </c:if>
+                            <c:if test="${20306 eq estateInfo.estate.projectStatus}">
+                                立项
+                            </c:if>
+                            <c:if test="${20302 eq estateInfo.estate.projectStatus}">
+                                签约
+                            </c:if>
+                            <c:if test="${20303 eq estateInfo.estate.projectStatus}">
+                                结案
+                            </c:if>
+                            <c:if test="${20304 eq estateInfo.estate.projectStatus}">
+                                取消跟单
+                            </c:if>
+                            <c:if test="${20305 eq estateInfo.estate.projectStatus}">
+                            </c:if>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目审核状态：</label>
+                        <div class="layui-input-inline">
+                            <c:choose>
+                                <c:when test="${estateInfo.estate.auditStatus=='12904'}">
+                                    -
+                                </c:when>
+                                <c:otherwise>
+                                    ${estateInfo.estate.auditStatusStr}
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作意向状态：</label>
+                        <div class="layui-input-inline">
+                            <c:if test="${'1' eq estateInfo.estate.cooperationStatus}">
+                                极有意向
+                            </c:if>
+                            <c:if test="${'2' eq estateInfo.estate.cooperationStatus}">
+                                一般跟单
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">销售状态：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.salesStatusStr}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">业务模式：</label>
+                        <div class="layui-input-inline">
+                            <c:if test="${25501 eq estateInfo.estate.businessModel}">标准</c:if>
+                            <c:if test="${25502 eq estateInfo.estate.businessModel}">非标准（保证金）</c:if>
+                            <c:if test="${25503 eq estateInfo.estate.businessModel}">非标准（诚意金）</c:if>
+                            <c:if test="${25504 eq estateInfo.estate.businessModel}">非标准（包销）</c:if>
+                            <c:if test="${25505 eq estateInfo.estate.businessModel}">非标准（前佣）</c:if>
+                            <c:if test="${25506 eq estateInfo.estate.businessModel}">非标准（全民经纪）</c:if>
+                            <c:if test="${25507 eq estateInfo.estate.businessModel}">非标准（其他）</c:if>
+                            <c:if test="${25508 eq estateInfo.estate.businessModel}">纯垫佣</c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">物业类型：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.mgtKbnStr}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产权年限：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.ownYearKbnStr}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">总价段：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.salePriceUnitMin}-${estateInfo.estate.salePriceUnitMax}万元/套
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">剩余可售货量金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.vendibilityAmount)}<c:if test="${not empty estateInfo.estate.vendibilityAmount}">亿</c:if>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目月大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.monthRoughAmount)}<c:if test="${not empty estateInfo.estate.monthRoughAmount}">亿</c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开发商全称：</label>
+                        <div class="layui-input-inline" title="${estateInfo.estate.developerName}">
+                            ${estateInfo.estate.developerName}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开发商简称：</label>
+                        <div class="layui-input-inline" title="${estateInfo.estate.devCompany}">
+                            ${estateInfo.estate.devCompany}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开发商是否大客户：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.bigCustomerFlagStr}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作方类型：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.partnerStr}
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否直签：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.directSignFlagStr}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作方名称：</label>
+                        <div class="layui-input-inline" title="${estateInfo.estate.partnerNm}">
+                            ${estateInfo.estate.partnerNm}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作方简称：</label>
+                        <div class="layui-input-inline" title="${estateInfo.estate.partnerAbbreviationNm}">
+                            ${estateInfo.estate.partnerAbbreviationNm}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作方品牌：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.developerBrandName}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否可垫佣甲方：</label>
+                        <div class="layui-input-inline">
+                            <c:if test="${ 1 eq estateInfo.estate.custodyFlg}">是</c:if>
+                            <c:if test="${null eq estateInfo.estate.custodyFlg or 0 eq estateInfo.estate.custodyFlg}">否</c:if>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">垫佣甲方简称：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.mattressNailName}
+                        </div>
+                    </div>
+                    <c:if test="${1 eq estateInfo.estate.custodyFlg}">
+
+                    </c:if>
+
+
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">共场：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.totalFieldFlagStr}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">刷筹：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.brushRaiseFlagStr}
+                        </div>
+                    </div>
+                </div>
+                <%--<div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计第一季度大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedQuarter1)}万元
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计第二季度大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedQuarter2)}万元
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计第三季度大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedQuarter3)}万元
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计第四季度大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedQuarter4)}万元
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计当年大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedThisYear)}万元
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预计明年大定金额：</label>
+                        <div class="layui-input-inline">
+                            ${sdk:mf2(estateInfo.estate.subscribedNextYear)}万元
+                        </div>
+                    </div>--%>
+                    <%--<div class="layui-inline">
+                        <label class="layui-form-label">是否借佣：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.isExcuseCommisionStr}
+                        </div>
+                    </div>
+                </div>--%>
+<%--
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目发布状态：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.releaseStatusStr}
+                        </div>
+                    </div>
+                </div>
+--%>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作周期：</label>
+                        <div class="layui-input-inline">
+                            <c:if test="${not empty estateInfo.estate.cooperationDtEnd}">
+                            ${sdk:ymd2(estateInfo.estate.cooperationDtStart)}至${sdk:ymd2(estateInfo.estate.cooperationDtEnd)}
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开发商对接人：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.devCompanyBroker}&nbsp;&nbsp;${estateInfo.estate.devCompanyBrokerTel}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作方对接人：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.partnerContactNm}&nbsp;&nbsp;${estateInfo.estate.partnerContactTel}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">项目负责人：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.projectLeaderName}&nbsp;&nbsp;${estateInfo.estate.projectLeaderTel}
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开发负责人：</label>
+                        <div class="layui-input-inline">
+                            ${estateInfo.estate.sceneDeptNm}${estateInfo.estate.sceneEmpName}&nbsp;&nbsp;${estateInfo.estate.empTel}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline"  style="width: auto;">
+                        <label class="layui-form-label">项目发布城市：</label>
+                        <div class="layui-input-inline hh"  style="width: 750px;height: auto;">
+                            <c:if test="${1 eq releaseCityflag}">
+                                ${releaseCityStr}
+                            </c:if>
+                            <c:if test="${0 eq releaseCityflag}">
+                                ${estateInfo.estate.cityNm}
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" style="width: auto;">
+                        <label class="layui-form-label">项目基本情况：</label>
+                        <div class="layui-input-inline hh" style="width: 750px;height: auto;">
+                            ${estateInfo.estate.projectInfoDesc}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" style="width: auto;">
+                        <label class="layui-form-label">所需支持：</label>
+                        <div class="layui-input-inline hh" style="width: 750px;height: auto;">
+                            ${estateInfo.estate.requiredForSupport}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <c:if test="${not empty estateInfo.jcqrhContractList}">
+                    <li class="layui-this">进场确认函</li>
+                    </c:if>
+                    <li class="<c:if test="${empty estateInfo.jcqrhContractList}">layui-this</c:if>">收入合同</li>
+<%--                     <c:if test="${not empty estateInfo.estateDyRecords}"> --%>
+                    <li>垫佣</li>
+<%--                     </c:if> --%>
+                    <li>收入方案</li>
+                    <li>返佣方案</li>
+                    <li>日志</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <c:if test="${not empty estateInfo.jcqrhContractList}">
+                    <div class="layui-tab-item layui-show">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="350">
+                                <col width="110">
+                                <col width="120">
+                                <col width="100">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>合同OA编号</th>
+                                <th>合同周期</th>
+                                <th>合同概要</th>
+                                <th>创建日期</th>
+                                <th>审核通过日期</th>
+                                <th>盖章合同</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${estateInfo.jcqrhContractList}" var="jcqrhContract" varStatus="index">
+                                <tr>
+                                    <td>${jcqrhContract.htOaNo}</td>
+                                    <td>
+                                            ${sdk:ymd2(jcqrhContract.htDateStart)}至${sdk:ymd2(jcqrhContract.htDateEnd)}
+                                    <td>
+                                        收入标的&nbsp;：&nbsp;${jcqrhContract.incomeSubject} </br>
+                                        收入结算条件&nbsp;：&nbsp;${jcqrhContract.commissionMemo} </br>
+                                        收入结算描述&nbsp;：&nbsp;${jcqrhContract.commissionMemoRemark} </br>
+                                        返佣标准&nbsp;：&nbsp;${jcqrhContract.rtnCommission} </br>
+                                        返佣结算条件&nbsp;：&nbsp;${jcqrhContract.rtnCommissionMemo} </br>
+                                    </td>
+                                    <td>${sdk:ymd2(jcqrhContract.oaCreateDate)}</td>
+                                    <td>${sdk:ymd2(jcqrhContract.oapassDate)}</td>
+                                    <td>
+                                        <c:forEach items="${jcqrhContract.fileList}" var="file" varStatus="index">
+                                        <a href="javascript:downloadOaFile('${file.fileUrl}','${file.fileName}');"
+                                           title="${file.fileName}">
+                                            <i class="layui-icon layui-icon-file-b"></i>
+                                        </a>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty estateInfo.jcqrhContractList}"><div class="nodata">暂无进场确认函数据</div></c:if>
+                    </div>
+                    </c:if>
+                    <div class="layui-tab-item <c:if test="${empty estateInfo.jcqrhContractList}">layui-show</c:if>">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="350">
+                                <col width="110">
+                                <col width="120">
+                                <col width="100">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>合同OA编号</th>
+                                <th>合同周期</th>
+                                <th>合同概要</th>
+                                <th>创建日期</th>
+                                <th>审核通过日期</th>
+                                <th>盖章合同</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${estateInfo.incomeContractList}" var="incomeContract" varStatus="index">
+                                <tr>
+                                    <td>${incomeContract.htOaNo}</td>
+                                    <td>
+                                        ${sdk:ymd2(incomeContract.htDateStart)}至${sdk:ymd2(incomeContract.htDateEnd)}
+                                    <td>
+                                        收入标的&nbsp;：&nbsp;${incomeContract.incomeSubject} </br>
+                                        收入结算条件&nbsp;：&nbsp;${incomeContract.commissionMemo} </br>
+                                        收入结算描述&nbsp;：&nbsp;${incomeContract.commissionMemoRemark} </br>
+                                        返佣标准&nbsp;：&nbsp;${incomeContract.rtnCommission} </br>
+                                        返佣结算条件&nbsp;：&nbsp;${incomeContract.rtnCommissionMemo} </br>
+                                    </td>
+                                    <td>${sdk:ymd2(incomeContract.oaCreateDate)}</td>
+                                    <td>${sdk:ymd2(incomeContract.oapassDate)}</td>
+                                    <td>
+                                        <c:forEach items="${incomeContract.fileList}" var="file" varStatus="index">
+                                            <a href="javascript:downloadOaFile('${file.fileUrl}','${file.fileName}');"
+                                               title="${file.fileName}">
+                                                <i class="layui-icon layui-icon-file-b"></i>
+                                            </a>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty estateInfo.incomeContractList}"><div class="nodata">暂无合同数据</div></c:if>
+                    </div>
+<%--                     <c:if test="${not empty estateInfo.estateDyRecords}"> --%>
+<!--                     <div class="layui-tab-item"> -->
+<!--                         <table class="layui-table" lay-even="" lay-skin="row"> -->
+<!--                             <colgroup> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="300"> -->
+<!--                                 <col width="200"> -->
+<!--                                 <col width="300"> -->
+<!--                                 <col> -->
+<!--                             </colgroup> -->
+<!--                             <thead> -->
+<!--                             <tr> -->
+<!--                                 <th align="center">序号</th> -->
+<!--                                 <th>垫佣周期</th> -->
+<!--                                 <th>垫佣比例</th> -->
+<!--                                 <th>垫佣金额（万元）</th> -->
+<!--                                 <th>创建时间</th> -->
+<!--                             </tr> -->
+<!--                             </thead> -->
+<!--                             <tbody> -->
+<%--                             <c:forEach items="${estateInfo.estateDyRecords}" var="item" varStatus="index"> --%>
+<!--                                 <tr> -->
+<%--                                     <td align="center">${index.count}</td> --%>
+<%--                                     <td>${sdk:ymd2(item.dyStartDate)}至 ${sdk:ymd2(item.dyEndDate)}</td> --%>
+<%--                                     <td>${item.dyscale}</td> --%>
+<%--                                     <td>${sdk:mf(item.dyAmount)}</td> --%>
+<%--                                     <td>${sdk:hmsfs(item.crtDt)}</td> --%>
+<!--                                 </tr> -->
+<%--                             </c:forEach> --%>
+<!--                             </tbody> -->
+<!--                         </table> -->
+<!--                     </div> -->
+<%--                     </c:if> --%>
+                    <div id="mattressControlRuleItem" class="layui-tab-item">
+                    		<table id="mattressControlRuleTable" lay-size="sm" lay-filter="mattressControlRuleTable"></table>
+                    </div>
+                    <div id="yjsrItem" class="layui-tab-item">
+                    	<table id="yjsrTable" lay-size="sm" lay-filter="yjsrTable"></table>
+<!--                         <table class="layui-table"> -->
+<!--                             <colgroup> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="200"> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col> -->
+<!--                             </colgroup> -->
+<!--                             <thead> -->
+<!--                             <tr> -->
+<!--                                 <th>方案名称</th> -->
+<!--                                 <th>方案描述</th> -->
+<!--                                 <th>启用状态</th> -->
+<!--                                 <th>创建人</th> -->
+<!--                                 <th>创建日期</th> -->
+<!--                                 <th>操作</th> -->
+<!--                             </tr> -->
+<!--                             </thead> -->
+<!--                             <tbody> -->
+<%--                             <c:forEach items="${yjsrReback}" var="plan"> --%>
+<!--                                 <tr> -->
+<%--                                     <td>${plan.planName}</td> --%>
+<%--                                     <td>${plan.planInfoDes}</td> --%>
+<!--                                     <td> -->
+<%--                                     	<c:if test="${plan.isEnable eq 'true'}">否</c:if> --%>
+<%--                                     	<c:if test="${plan.isEnable eq 'false'}">是</c:if> --%>
+<!--                                     </td> -->
+<%--                                     <td>${plan.userName}</td> --%>
+<%--                                     <td>${sdk:ymd2(plan.createDate)}</td> --%>
+<!--                                     <td> -->
+
+<%--                                         <c:if test="${!plan.isEnable}"> --%>
+<!--                                             <a class="layui-btn layui-btn-xs" data-type="editPlan" -->
+<%--                                                data-id="${plan.id}" data-planNum="${plan.planNum}">编辑</a> --%>
+<%--                                         </c:if> --%>
+<%--                                         <c:if test="${!plan.isEnable}"> --%>
+<!--                                             <a class="layui-btn layui-btn-xs layui-btn-danger" data-type="prohibitPlan" -->
+<%--                                                data-id="${plan.id}" data-enableType="1">禁用</a> --%>
+<%--                                         </c:if> --%>
+<%--                                         <c:if test="${plan.isEnable}"> --%>
+<!--                                             <a class="layui-btn layui-btn-xs" data-type="prohibitPlan" -->
+<%--                                                data-id="${plan.id}" data-enableType="0">启用</a> --%>
+<%--                                         </c:if> --%>
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<%--                             </c:forEach> --%>
+<!--                             </tbody> -->
+<!--                         </table> -->
+<%--                         <c:if test="${empty yjsrReback}"><div class="nodata">暂无收入方案数据</div></c:if> --%>
+                    </div>
+                    <div id="yjfyItem" class="layui-tab-item">
+                    		<table id="yjfyTable" lay-size="sm" lay-filter="yjfyTable"></table>
+                    </div>
+                    <div id="changeLogItem" class="layui-tab-item">
+                    	<table id="changeLogTable" lay-size="sm" lay-filter="changeLogTable"></table>
+<!--                         <table class="layui-table"> -->
+<!--                             <colgroup> -->
+<!--                                 <col width="60"> -->
+<!--                                 <col width="450"> -->
+<!--                                 <col width="150"> -->
+<!--                                 <col width="150"> -->
+<!--                             </colgroup> -->
+<!--                             <thead> -->
+<!--                             <tr> -->
+<!--                                 <th align="center">序号</th> -->
+<!--                                 <th>描述</th> -->
+<!--                                 <th>操作人</th> -->
+<!--                                 <th>操作时间</th> -->
+<!--                             </tr> -->
+<!--                             </thead> -->
+<!--                             <tbody> -->
+<%--                             <c:forEach items="${estateInfo.estateChangeDetails}" var="estateChange"> --%>
+<!--                                 <tr> -->
+<%--                                     <td align="center">${estateChange.orderId}</td> --%>
+<%--                                     <td>${estateChange.changeDetail}</td> --%>
+<%--                                     <td>${estateChange.operatorName}<c:if test="${estateChange.operatorCode ne 0}">（${estateChange.operatorCode}）</c:if></td> --%>
+<%--                                     <td>${estateChange.changeDate}</td> --%>
+<!--                                 </tr> -->
+<%--                             </c:forEach> --%>
+<!--                             </tbody> -->
+<!--                         </table> -->
+<%--                         <c:if test="${empty estateInfo.estateChangeDetails}"><div class="nodata">暂无操作日志数据</div></c:if> --%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="${ctx}/meta/pmls/js/estate/estateDetail.js?_v=${vs}"></script>
+<script type="text/javascript" src="${ctx}/meta/pmls/js/yjPlan/yjsrPlanList.js?_v=${vs}"></script>
+<script type="text/javascript" src="${ctx}/meta/pmls/js/yjPlan/yjfyPlanList.js?_v=${vs}"></script>
+<script type="text/javascript" src="${ctx}/meta/pmls/js/yjPlan/changeLogList.js?_v=${vs}"></script>
+<script type="text/javascript" src="${ctx}/meta/pmls/js/yjPlan/mattressControlRuleList.js?_v=${vs}"></script>
+</body>
+</html>
+

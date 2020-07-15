@@ -1,0 +1,164 @@
+
+
+@charset "UTF-8";
+/**
+ * jquery.multi.select.css
+ * @authors Jack Chan (fulicat@qq.com)
+ * @date    2016-05-11 13:22:21
+ * @version 1.0
+ */
+
+.multi-select-group{
+	font-size:0;
+	display:inline-block;
+}
+.multi-select-group:after{
+	content:"\20";
+	clear:both;
+	display:block;
+	width:0;
+	height:0;
+}
+.multi-select-group>.multi-select{
+	margin-left:-1px;
+}
+.multi-select-group>.multi-select:hover,
+.multi-select.active{
+	z-index:3;
+}
+.multi-select,
+.multi-select *{
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+.multi-select{
+	display:inline-block;
+	position:relative;
+	z-index:2;
+	font-size:12px;
+	background-color:#fff;
+}
+.multi-select:before,
+.multi-select:after{
+	content:"\20";
+	display:block;
+	pointer-events:none;
+	position:absolute;
+	top:1px;
+	right:1px;
+	bottom:1px;
+	width:20px;
+}
+.multi-select:before{
+	background-color:inherit;
+}
+.multi-select:after{
+	content:"\20";
+	display:block;
+	pointer-events:none;
+	position:absolute;
+	top:50%;
+	right:6px;
+	margin-top:-2px;
+	width:0;
+	height:0;
+	font-size:0;
+	border-style: solid;
+	border-width: 5px 5px 0 5px;
+	border-color: #D0D1D3 transparent transparent transparent;
+}
+.multi-select.disabled{
+	pointer-events:none;
+	color:#999;
+	background-color:#f1f1f1;
+}
+.multi-select:hover:after{
+	border-top-color:#bbb;
+}
+.multi-select-text:hover{
+	border-color:rgb(137,197,245);
+}
+.multi-select.active>.multi-select-text,
+.multi-select.active>.multi-select-list,
+.multi-select-text:focus{
+	border-color:rgb(102,175,233);
+}
+.multi-select-text{
+	width:100px;
+	min-width:100px;
+	height:34px;
+	line-height:34px;
+	padding:0 20px 0 5px;
+	border:1px #ccc solid;
+	outline:0;
+	padding-right:20px;
+	background-color:inherit;
+}
+.multi-select-list,
+.multi-select-item{
+	margin:0;
+	padding:0;
+}
+.multi-select>.multi-select-list{
+	display:none;
+}
+.multi-select.active>.multi-select-list{
+	display:block;
+}
+.multi-select-list{
+	position:absolute;
+	top:100%;
+	left:0;
+	margin-top:-1px;
+	width:100%;
+	min-width:100%;
+	border-width:1px 1px 1px 1px;
+	border-style:solid;
+	border-color:transparent #ccc #ccc #ccc;
+	background-color:#fff;
+	overflow:hidden;
+	overflow-y:auto;
+	max-height:360px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+.multi-select-item{
+	vertical-align:top;
+	display:block;
+}
+.multi-select-item>label{
+	display:block;
+	position:relative;
+}
+.multi-select-item>label>input{
+	position:absolute;
+	top:4px;
+	left:4px;
+}
+.multi-select-item>label>span{
+	display:block;
+	padding:6px 4px 6px 24px;
+	width:inherit;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.multi-select-item:hover{
+	background-color:#eee;
+	/*color:#fff;
+	background-color:#1E90FF;*/
+}
+
+.s-scoll-y {
+    width: 100%;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
+.s-scoll-x {
+    width: 100%;
+    overflow-x: scroll;
+    margin-top: 10px;
+}

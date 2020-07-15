@@ -1,0 +1,95 @@
+//Add By tong 2017/04/07 Start 报表用-------------------
+
+body{
+	font-size:12px;
+}
+::-webkit-scrollbar
+{
+    width: 8px;
+    height: 10px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: #eee;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+    height: 5px;
+    background-color: #ddd;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+    width: 5px;
+    background-color: #CCCCCC;
+    -webkit-border-radius: 3px;
+}
+.navbar-static-top a{
+	font-size:14px
+}
+.butt_blue {
+	color: #2b91e5;
+	font-weight: bold;
+	display: inline-block;
+	padding: 0px 3px;
+	line-height: 20px;
+	margin: 2px 2px;
+	text-align: center;
+}
+.butt_blue:hover {
+	color: #2b91e5;
+	cursor:pointer;
+}
+.search-title{
+		padding-top:10px;
+		padding-bottom:10px;
+		font-size:14px;
+		background-color: #337ab7;
+   		 color: #fff;
+	}
+.lab{
+	    font-weight: 500;
+	    min-width:74px;
+	    text-align:right;
+}
+.multi-select-text {
+    width: 100px;
+    min-width: 100px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 20px 0 5px;
+    border: 1px #ccc solid;
+    outline: 0;
+    padding-right: 20px;
+    background-color: inherit;
+}
+.btn {
+	font-size:12px;
+}
+.btn-group-vertical>.btn, .btn-group>.btn {
+    height: 28px;
+}
+.form-inline+.form-inline{
+	margin-top:10px;
+}
+.bootstrap-select.btn-group .btn .filter-option {
+    color: #999;
+}
+h2{
+	font-size:14px;
+}
+.input-group-addon {
+    padding: 6px 6px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+ul#pagings {
+    float: right;
+}
